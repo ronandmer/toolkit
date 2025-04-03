@@ -309,7 +309,7 @@
                 <textarea id="inputData-yaml" placeholder="Enter YAML data to format/validate..." class="border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
             </div>
 
-            <div class="button-container">
+            <div class="button-container" id="buttonContainer">
                 <button onclick="formatData()" class="format-button">Format</button>
                 <button onclick="validateData()" class="validate-button">Validate</button>
             </div>
@@ -342,6 +342,15 @@
                 const tabId = tab.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
                 activeTab = tabId;
+
+                // Update buttons based on selected tab
+                const buttonContainer = document.getElementById('buttonContainer');
+                if (tabId === 'yaml') {
+                    buttonContainer.innerHTML = '<button onclick="formatData()" class="format-button">Format</button>';
+                } else {
+                    buttonContainer.innerHTML = '<button onclick="formatData()" class="format-button">Format</button>' +
+                        '<button onclick="validateData()" class="validate-button">Validate</button>';
+                }
             });
         });
 
@@ -370,6 +379,16 @@
                     firstSubTab.classList.add('active');
                     document.getElementById(firstSubTabId).classList.add('active');
                     activeTab = firstSubTabId; // Update activeTab
+
+                    //set initial buttons
+                    const buttonContainer = document.getElementById('buttonContainer');
+                    if(firstSubTabId === 'yaml'){
+                        buttonContainer.innerHTML = `<button onclick="formatData()" class="format-button">Format</button>`;
+                    }
+                    else{
+                        buttonContainer.innerHTML = `<button onclick="formatData()" class="format-button">Format</button>
+                        <button onclick="validateData()" class="validate-button">Validate</button>`;
+                    }
                 }
             });
         });
